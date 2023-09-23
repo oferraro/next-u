@@ -1,0 +1,125 @@
+<!-- project section -->
+<section class="project_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Projects
+        </h2>
+      </div>
+      <div class="carousel-wrap ">
+        <div class="filter_box">
+          <h6>
+            Category filter
+          </h6>
+          <nav class="owl-filter-bar">
+            <a href="#" class="item active" data-owl-filter="*">All</a>
+            <a href="#" class="item" data-owl-filter=".painting">Painting</a>
+            <a href="#" class="item" data-owl-filter=".reconstruction">Reconstruction </a>
+            <a href="#" class="item" data-owl-filter=".repair">Repairs </a>
+            <a href="#" class="item" data-owl-filter=".residential">Residential </a>
+            <a href="#" class="item" data-owl-filter=".styling">Styling </a>
+          </nav>
+        </div>
+
+        <div class="owl-carousel project_carousel">
+          <div class="item painting">
+            <div class="box">
+              <div class="img-box">
+                <img src="images/project1.jpg" alt="" />
+                <a href="" class="pin_link">
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Interior work
+                </h5>
+                <p>
+                  alteration in some form, by injected humour, or randomised words which don't look even slightly
+                  believable. If you are going to use
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="item reconstruction">
+            <div class="box">
+              <div class="img-box">
+                <img src="images/project2.jpg" alt="" />
+                <a href="" class="pin_link">
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Interior work
+                </h5>
+                <p>
+                  alteration in some form, by injected humour, or randomised words which don't look even slightly
+                  believable. If you are going to use
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="item repair">
+            <div class="box">
+              <div class="img-box">
+                <img src="images/project1.jpg" alt="" />
+                <a href="" class="pin_link">
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Interior work
+                </h5>
+                <p>
+                  alteration in some form, by injected humour, or randomised words which don't look even slightly
+                  believable. If you are going to use
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="item residential">
+            <div class="box">
+              <div class="img-box">
+                <img src="images/project1.jpg" alt="" />
+                <a href="" class="pin_link">
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Interior work
+                </h5>
+                <p>
+                  alteration in some form, by injected humour, or randomised words which don't look even slightly
+                  believable. If you are going to use
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="item styling">
+            <div class="box">
+              <div class="img-box">
+                <img src="images/project1.jpg" alt="" />
+                <a href="" class="pin_link">
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Interior work
+                </h5>
+                <p>
+                  alteration in some form, by injected humour, or randomised words which don't look even slightly
+                  believable. If you are going to use
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- end project section -->
