@@ -2,3 +2,4 @@
 `composer require firebase/php-jwt`
 
 ### TODO: remove credentials from files, use dot_env
+
