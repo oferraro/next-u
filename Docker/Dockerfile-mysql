@@ -1,0 +1,15 @@
+# Use the official MySQL image
+FROM mysql:8.0
+
+# Set the root password (change this to your preferred password)
+ENV MYSQL_ROOT_PASSWORD=mysecretpassword
+
+# Expose the MySQL port
+EXPOSE 3306
+
+# Define a volume for MySQL data
+VOLUME /var/lib/mysql
+
+# Start MySQL server
+CMD ["mysqld"]
+
