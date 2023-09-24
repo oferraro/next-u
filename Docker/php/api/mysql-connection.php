@@ -1,12 +1,9 @@
 <?php
 
-define('DB_NAME', 'mydatabase');
-define('DB_HOST', 'de31d9623059'); // Container name of MySQL instance
-define('DB_USER', 'root');
-define('DB_PASSWORD', 'mysecretpassword');
+require_once '../../getEnv.php';
 
 // Create a connection
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$conn = new mysqli($_ENV['DB_HOST'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME']);
 
 // Check connection
 if ($conn->connect_error) {

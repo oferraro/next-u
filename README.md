@@ -3,3 +3,5 @@
 
 ### TODO: remove credentials from files, use dot_env
 
+### TODO: Add instructions / steps to run the project (composer install, etc)
+

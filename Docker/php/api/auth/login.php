@@ -5,6 +5,7 @@ header("Access-Control-Allow-Headers: *");
 require_once '../../vendor/autoload.php'; // Include the JWT library
 require_once '../mysql-connection.php';
 require_once '../helpers.php';
+require_once '../../getEnv.php';
 
 
 // Your user validation logic here
@@ -50,7 +51,7 @@ if ($user) {
     $algorithm = 'HS256';
 
     // Generate the JWT
-    $token = Firebase\JWT\JWT::encode($payload, 'your_secret_key', $algorithm);
+    $token = Firebase\JWT\JWT::encode($payload, $_ENV['SECRET'], $algorithm);
 
     /**
      * ' or 1=1 or '

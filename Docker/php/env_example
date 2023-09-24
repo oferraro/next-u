@@ -1,0 +1,5 @@
+SECRET=your_secret_key
+DB_NAME=mydatabase
+DB_HOST=de31d9623059
+DB_USER=root
+DB_PASSWORD=mysecretpassword
