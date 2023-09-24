@@ -16,6 +16,7 @@
           <div class="form-group">
             <label for="message-text" class="col-form-label">Password:</label>
             <input type="password" class="form-control" id="password" name="password">
+            <!-- TODO: Add eventListener for on key press to submit -->
           </div>
         </form>
       </div>

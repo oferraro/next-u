@@ -17,10 +17,11 @@ const login = {
         const result = await fetchClass.post(`${apiUrl}auth/login.php`, data);
         if (result.success) {
             this.token = result.token;
+            // TODO: Save token in localStorage
+            storage.save(storageKeyToken, this.token)
         } else {
             alert('login error');
             // TODO: Add an error in the DOM
-            // TODO: Save token in localStorage
         }
     }
 };

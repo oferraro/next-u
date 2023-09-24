@@ -68,6 +68,7 @@
   <!-- End Google Map -->
 
   <script src="js/app/consts.js" defer></script>
+  <script src="js/app/storage.js" defer></script>
   <script src="js/app/login.js" defer></script>
   <script src="js/app/fetch.js" defer></script>
   <script src="js/app/index.js" defer></script>
