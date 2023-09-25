@@ -1251,3 +1251,7 @@ a:focus {
   border-bottom: unset;
   cursor: pointer;
 }
+
+#loginModal #login-error {
+  display: none;
+}

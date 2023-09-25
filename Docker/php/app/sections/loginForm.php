@@ -19,6 +19,10 @@
             <!-- TODO: Add eventListener for on key press to submit -->
           </div>
         </form>
+        <div class="alert alert-danger" id="login-error" role="alert">
+          Login error
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id="loginModalCloseButton" data-dismiss="modal">Close</button>
