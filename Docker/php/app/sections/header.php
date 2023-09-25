@@ -83,8 +83,8 @@
                 <li class="nav-item">
                   <a class="nav-link" href="contact.html">Contact Us</a>
                 </li>
-                <li class="nav-item">
-                  <a data-toggle="modal" data-target="#loginModal" class="nav-link" href="#"> Login</a>
+                <li class="nav-item" id="login-link">
+                  <a data-toggle="modal" data-target="#loginModal" class="nav-link" href="#">Login</a>
                 </li>
                 <form class="form-inline">
                   <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">

@@ -58,7 +58,13 @@ if ($user) {
      */
 
     // Send the token back to the client
-    echo json_encode(array("success" => true, "token" => $token));
+    echo json_encode([
+        "success" => true, "token" => $token,
+        'userData' => [
+            "username" => $user['username'],
+            "email" => $user['email']
+        ]
+    ]);
 } else {
     http_response_code(401); // Unauthorized
     echo json_encode(array("success" => false, "message" => "Invalid credentials"));

@@ -6,7 +6,13 @@ const storage = {
         localStorage.removeItem(key);
     },
     get(key) {
-        const value = localStorage.getItem(key);
-        return JSON.parse(value);
+        return localStorage.getItem(key);
+    },
+    saveJson(key, value) {
+        return localStorage.setItem(key, JSON.stringify(value));
+    },
+    getJson(key) {
+        console.log('get ', key);
+        return JSON.parse(this.get(key));
     }
 };

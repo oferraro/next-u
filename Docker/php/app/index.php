@@ -76,6 +76,9 @@
   <?php
     require_once 'sections/loginForm.php';
   ?>
+  <?php
+    require_once 'sections/modalMessage.php';
+  ?>
 
 <script>
   $('#loginModal').on('shown.bs.modal')

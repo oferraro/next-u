@@ -1238,3 +1238,16 @@ a:focus {
   color: inherit;
 }
 /*# sourceMappingURL=style.css.map */
+
+.dropdown.profile .dropdown-menu {
+  padding: 5px 10px;
+}
+
+.dropdown.profile .dropdown-menu .entry {
+  border-bottom: 1px solid rgb(210, 207, 207);
+}
+
+.dropdown.profile .dropdown-menu .entry:last-child {
+  border-bottom: unset;
+  cursor: pointer;
+}

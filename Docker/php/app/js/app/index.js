@@ -1,1 +1,3 @@
-login.start();
+document.addEventListener('DOMContentLoaded', function() {
+    login.start();
+});
