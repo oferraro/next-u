@@ -12,7 +12,6 @@ const storage = {
         return localStorage.setItem(key, JSON.stringify(value));
     },
     getJson(key) {
-        console.log('get ', key);
         return JSON.parse(this.get(key));
     }
 };

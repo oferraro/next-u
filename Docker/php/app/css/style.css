@@ -1255,3 +1255,9 @@ a:focus {
 #loginModal #login-error {
   display: none;
 }
+
+#productsList {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}

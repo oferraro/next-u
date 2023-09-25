@@ -3,7 +3,7 @@ const login = {
     loginForm: false,
     token: false,
     userData: false,
-    start() {
+    async start() {
         const loginForm = document.querySelector('#loginForm');
         this.loginForm = loginForm;
         loginForm.addEventListener('submit', function (event) {
@@ -16,6 +16,11 @@ const login = {
         this.userData = storage.getJson(userDataKeyToken);
         if (this.userData) {
             this.setUserData(this.userData);
+        }
+
+        const route = urlHelper.get('route');
+        if (route === 'products') {
+            const allProducts = await products.get();
         }
     },
     async login() {

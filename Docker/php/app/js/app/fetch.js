@@ -1,6 +1,5 @@
 const fetchClass = {
     async post(url, data) {
-        console.log('data', data);
         const response = await fetch(url, {
             method: "POST",
             headers: {
@@ -10,5 +9,8 @@ const fetchClass = {
         });
         const result = await response.json();
         return result;      
+    },
+    async get(url) {
+        return await fetch(url);
     }
 }

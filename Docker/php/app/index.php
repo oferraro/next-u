@@ -2,6 +2,7 @@
 <html lang="en">
 
 <?php
+  $showMap = false;
   include 'sections/head.php';
 ?>
 
@@ -14,14 +15,20 @@
 
 <body>
 
-  <div class="hero_area">
+  <?php if ($route === 'products'): ?>
     <?php 
       include 'sections/header.php';
     ?>
-    <?php
-      include 'sections/slider.php';
-    ?>
-  </div>
+  <?php else: ?>
+    <div class="hero_area">
+      <?php 
+        include 'sections/header.php';
+      ?>
+      <?php
+        include 'sections/slider.php';
+      ?>
+    </div>
+  <?php endif; ?>
 
   <?php
     if ($route === 'products'):
@@ -93,6 +100,9 @@
   <!-- End Google Map -->
   <?php endif; ?>
 
+  <script src="js/app/products.js" defer></script>
+  <script src="js/app/urlHelper.js" defer></script>
+  <script src="js/app/css.js" defer></script>
   <script src="js/app/consts.js" defer></script>
   <script src="js/app/storage.js" defer></script>
   <script src="js/app/login.js" defer></script>
