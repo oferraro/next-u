@@ -5,6 +5,13 @@
   include 'sections/head.php';
 ?>
 
+<?php
+  $route = false;
+  if (array_key_exists('route', $_GET)) {
+    $route = $_GET['route'];
+  }
+?>
+
 <body>
 
   <div class="hero_area">
@@ -17,32 +24,46 @@
   </div>
 
   <?php
-    include 'sections/service.php';
-  ?>
-
+    if ($route === 'products'):
+    ?>
+      <?php
+        include 'sections/products.php';
+      ?>
   <?php
-    include 'sections/about.php';
-  ?>
+    endif; ?>
 
-  <?php
-    include 'sections/project.php';
-  ?>
+  <?php 
+    if (!$route): ?>
 
-  <?php
-    include 'sections/testimonial.php';
-  ?>
+    <?php
+      include 'sections/service.php';
+    ?>
 
-  <?php
-    include 'sections/why-us.php';
-  ?>
+    <?php
+      include 'sections/about.php';
+    ?>
 
-  <?php
-    include 'sections/contact.php';
-  ?>
+    <?php
+      include 'sections/project.php';
+    ?>
 
-  <?php
-    include 'sections/info.php';
-  ?>
+    <?php
+      include 'sections/testimonial.php';
+    ?>
+
+    <?php
+      include 'sections/why-us.php';
+    ?>
+
+    <?php
+      include 'sections/contact.php';
+    ?>
+
+    <?php
+      include 'sections/info.php';
+    ?>
+
+  <?php endif; ?>
 
   <?php
     include 'sections/footer.php';

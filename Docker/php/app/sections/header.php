@@ -66,22 +66,22 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="service.html">Services</a>
+                  <a class="nav-link" href="index.php?route=products">Products</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.html"> About</a>
+                  <a class="nav-link" href="index.php?route=about"> About</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="project.html">Project</a>
+                  <a class="nav-link" href="index.php?route=project">Project</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="testimonial.html">Testimonial</a>
+                  <a class="nav-link" href="index.php?route=testimonial">Testimonial</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact Us</a>
+                  <a class="nav-link" href="index.php?route=contact">Contact Us</a>
                 </li>
                 <li class="nav-item" id="login-link">
                   <a data-toggle="modal" data-target="#loginModal" class="nav-link" href="#">Login</a>
