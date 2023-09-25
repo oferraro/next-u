@@ -56,6 +56,7 @@
     ?>
 
     <?php
+      $showMap = true;
       include 'sections/contact.php';
     ?>
 
@@ -83,10 +84,14 @@
   <script src="https://huynhhuynh.github.io/owlcarousel2-filter/dist/owlcarousel2-filter.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
+  
+  <?php
+    if ($showMap): ?>
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
+  <?php endif; ?>
 
   <script src="js/app/consts.js" defer></script>
   <script src="js/app/storage.js" defer></script>

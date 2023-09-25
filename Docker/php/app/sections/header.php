@@ -65,10 +65,10 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav  ">
-                <li class="nav-item active">
+                <li class="nav-item <?php if (!$route) { echo 'active'; } ?>">
                   <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?php if ($route === 'products') { echo 'active'; } ?>">
                   <a class="nav-link" href="index.php?route=products">Products</a>
                 </li>
                 <li class="nav-item">
