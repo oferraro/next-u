@@ -74,6 +74,7 @@ const products = {
         if (product) {
             products.cart.delete(id);
             storage.saveJson(storageKeyCart, Array.from(products.cart.values()));
+            products.saveCartInBackend();
             products.addCartItemsToHTML();
         }
     },
@@ -87,6 +88,7 @@ const products = {
             products.cart.set(product.id, {product, amount: 1});
         }
         storage.saveJson(storageKeyCart, Array.from(products.cart.values()));
+        products.saveCartInBackend();
         products.addCartItemsToHTML();
     },
     cartProductTemplate(product) {
@@ -113,6 +115,7 @@ const products = {
         }
         products.addCartItemsToHTML();
         storage.saveJson(storageKeyCart, Array.from(products.cart.values()));
+        products.saveCartInBackend();
     },
     incrementItem(id) {
         const product = products.cart.get(id);
@@ -122,5 +125,17 @@ const products = {
         }
         products.addCartItemsToHTML();
         storage.saveJson(storageKeyCart, Array.from(products.cart.values()));
+        products.saveCartInBackend();
+    },
+    async saveCartInBackend() {
+        const object = {};
+        for (let entry of products.cart.entries()) {
+            object[entry[1].product.id] = {
+                product: entry[1].product,
+                amount: entry[1].amount
+            }
+        }
+        const response = await fetchClass.post(`${apiUrl}products/cart.php`, object, true);
+        console.log(object);
     }
 }
