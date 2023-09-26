@@ -61,9 +61,17 @@ const products = {
                     <h4 class="card-title">${product.name}</h4>
                     <p class="card-text">${product.price}</p>
                     <div class="btn btn-primary" onclick="products.addToCart('${productString}')">Add</div>
-                    <div class="btn btn-danger">Remove</div>
+                    <div class="btn btn-danger" onclick="products.remove(${product.id})">Remove</div>
                 </div>
             </div>`;
+    },
+    remove(id) {
+        const product = products.cart.get(id);
+        if (product) {
+            products.cart.delete(id);
+            storage.saveJson(storageKeyCart, Array.from(products.cart.values()));
+            products.addCartItemsToHTML();
+        }
     },
     addToCart(productSanitized) {
         const product = JSON.parse(productSanitized.replace(/#/g, '"'));
