@@ -67,6 +67,7 @@ const login = {
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <div class="entry">${userData.username}</div>
             <div class="entry">${userData.email}</div>
+            <div class="entry" id="cartButton">Cart</div>
             <div class="entry" id="logoutButton" onclick="login.logout()">logout</div>
         </div>
         </div>`;

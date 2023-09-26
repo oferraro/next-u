@@ -4,12 +4,40 @@ const products = {
     start() {
         products.cart = new Map();
         products.getCart();
+        products.addCartItemsToHTML();
+        products.setCartButtonAction();
+    },
+    setCartButtonAction() {
+        const cartButton = document.getElementById('cartButton');
+        cartButton.addEventListener('click', () => {
+            const cartListContainer = document.getElementById('cartListContainer');
+            if (cartListContainer) {
+                if (cartListContainer.style.display !== 'block') {
+                    cartListContainer.style.display = 'block';
+                } else {
+                    cartListContainer.style.display = 'none';
+                }
+            }
+            console.log('cartButton');
+        });
     },
     getCart() {
         const cartFromStorage = storage.getJson(storageKeyCart);
         cartFromStorage.forEach(prod => {
             products.cart.set(prod['product'].id, {product: prod.product, amount: prod.amount});
         });
+    },
+    addCartItemsToHTML() {
+        const cartList = document.getElementById('cartList');
+        if (cartList) {
+            cartList.innerHTML = '';
+            for (let product of products.cart.values()) {
+                const productHTML = document.createElement('div');
+                productHTML.setAttribute(`cart-item-${product.product.id}`, product.product.id);
+                productHTML.innerHTML = products.cartProductTemplate(product);
+                cartList.appendChild(productHTML);
+            }
+        }
     },
     async get() {
         const allProducts = await (await fetchClass.get(`${apiUrl}products/get.php`)).json();
@@ -46,6 +74,41 @@ const products = {
         } else {
             products.cart.set(product.id, {product, amount: 1});
         }
+        storage.saveJson(storageKeyCart, Array.from(products.cart.values()));
+        products.addCartItemsToHTML();
+    },
+    cartProductTemplate(product) {
+        return `<div id="cart-item-${product.product.id}">
+            <div>
+            ${product.product.name} (X ${product.amount}): € ${product.amount * product.product.price}
+            </div>
+            <div class="actions">
+                <div>
+                    <span onclick="products.decrementItem(${product.product.id})">-</span>
+                    <span onclick="products.incrementItem(${product.product.id})">+</span>
+                </div>
+                <img src="${product.product.image}" alt="${product.product.name}">
+            </div>
+        <div>`;
+    },
+    decrementItem(id) {
+        const product = products.cart.get(id);
+        product.amount -= 1;
+        if (product && product.amount < 1) {
+            products.cart.delete(id);
+        } else {
+            products.cart.set(id, product);
+        }
+        products.addCartItemsToHTML();
+        storage.saveJson(storageKeyCart, Array.from(products.cart.values()));
+    },
+    incrementItem(id) {
+        const product = products.cart.get(id);
+        product.amount += 1;
+        if (product) {
+            products.cart.set(id, product);
+        }
+        products.addCartItemsToHTML();
         storage.saveJson(storageKeyCart, Array.from(products.cart.values()));
     }
 }
