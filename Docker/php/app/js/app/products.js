@@ -9,17 +9,18 @@ const products = {
     },
     setCartButtonAction() {
         const cartButton = document.getElementById('cartButton');
-        cartButton.addEventListener('click', () => {
-            const cartListContainer = document.getElementById('cartListContainer');
-            if (cartListContainer) {
-                if (cartListContainer.style.display !== 'block') {
-                    cartListContainer.style.display = 'block';
-                } else {
-                    cartListContainer.style.display = 'none';
+        if (cartButton) {
+            cartButton.addEventListener('click', () => {
+                const cartListContainer = document.getElementById('cartListContainer');
+                if (cartListContainer) {
+                    if (cartListContainer.style.display !== 'block') {
+                        cartListContainer.style.display = 'block';
+                    } else {
+                        cartListContainer.style.display = 'none';
+                    }
                 }
-            }
-            console.log('cartButton');
-        });
+            });
+        }
     },
     getCart() {
         const cartFromStorage = storage.getJson(storageKeyCart);
@@ -40,16 +41,19 @@ const products = {
         }
     },
     async get() {
-        const allProducts = await (await fetchClass.get(`${apiUrl}products/get.php`)).json();
+        const allProducts = await fetchClass.post(`${apiUrl}products/get.php`, {}, true);
         const productsListEl = document.getElementById('productsList');
-        allProducts.forEach(product => {
-            const productTemplate = this.productTemplate(product);
-            const productCard = document.createElement('div');
-            productCard.innerHTML = productTemplate;
-            productsListEl.appendChild(productCard);
-        });
-        
-        cssClass.reloadCSS('mainCss');
+
+        if (allProducts.success && allProducts.success === true) {
+            allProducts.products.forEach(product => {
+                const productTemplate = this.productTemplate(product);
+                const productCard = document.createElement('div');
+                productCard.innerHTML = productTemplate;
+                productsListEl.appendChild(productCard);
+            });
+            
+            cssClass.reloadCSS('mainCss');
+        }
         return allProducts;
     },
     productTemplate(product) {
