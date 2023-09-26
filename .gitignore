@@ -1,3 +1,4 @@
 
 Docker/php/vendor
+*.env
 
