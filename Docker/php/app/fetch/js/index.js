@@ -77,7 +77,8 @@
 
     document.querySelector('#fetchCall1').addEventListener('click', async function (event) {
         const response = await getProducts();
-        statusColor(response);
+        const products = await response.json();
+        statusColor(response, products);
     });
 
     document.querySelector('#fetchCallError').addEventListener('click', async function (event) {
@@ -124,7 +125,8 @@
         const deleteResponse = await fetch(deleteUrl, {
             method: 'DELETE'
         });
-        statusColor(deleteResponse)
+        statusColor(deleteResponse);
+        updateProductIds();
     });
 
     document.querySelector('#fetchWithParamsJson').addEventListener('click', async function (event) {
@@ -164,15 +166,14 @@
         });
         const newProduct = await onProductResponse.json();
         statusColor(response, newProduct);
+        updateProductIds();
     });
 
     document.getElementById('fetchDeleteById').addEventListener('click', async function(event) {
         const id = document.querySelector('#products-id-list').value;
-        
         const response = await fetch(`${apiUrl}/products/${id}`, {
             method: 'DELETE'
         });
-        const data = response.json();
         statusColor(response);
         updateProductIds();
     });

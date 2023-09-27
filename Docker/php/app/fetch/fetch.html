@@ -47,9 +47,12 @@
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div>
-                        <pre><code class="javascript">axios.get('/user/12345').catch(function (error) {
-    // Code here
-});</code></pre>
+                        <pre><code class="javascript">const response = await fetch('/user/12345');
+if (!response.ok) { // if response.ok is not true it has an error
+        // response.status (status code)
+        // response.statusText (status text)
+    };
+}</code></pre>
                         <div class="pt-0 ps-2 py-2">
                             <button type="button" class="btn btn-primary" id="fetchCallError">Call Error</button>
                         </div>
@@ -66,15 +69,19 @@
                     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     
                         <div>
-                            <pre><code class="javascript">const params = new URLSearchParams();
-params.append('name', faker.commerce.product());
+                            <pre><code class="javascript">
+// json server doesn't work with form data, only JSON (will create a new id without values)
+
+const params = new FormData(); // Create a form object
+params.append('name', faker.commerce.product()); // Append values to form object
 params.append('price', faker.commerce.price());
 params.append('tags', faker.hacker.noun());
 
-axios.post(`${apiUrl}/products`, params).then(response => {
-    results.innerText = JSON.stringify(response.data, null, 2);
-    statusColor(response);
-});</code></pre>
+const result = await fetch(`${apiUrl}/products`, {  // Call with params and method post
+    method: 'POST',
+    body: params
+});
+const data = await result.json();</code></pre>
                             <div class="pt-0 ps-2 py-2">
                                 <button type="button" class="btn btn-primary" id="fetchWithParams">Call With params</button>
                             </div>
@@ -91,12 +98,21 @@ axios.post(`${apiUrl}/products`, params).then(response => {
                     <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     
                         <div>
-                            <pre><code class="javascript">const params = {
+                            <pre><code class="javascript">
+const params = { // Create a json object for params
     name: faker.commerce.product(),
     price: faker.commerce.price(),
     tags: faker.hacker.noun()
 };
-const response = await axios.post(`${apiUrl}/products`, params);</code></pre>
+const response = await fetch(`${apiUrl}/products`, {
+    method: 'POST',
+    headers: {
+        "Content-Type": "application/json" // define header for content type in order to send json data
+    },
+    body: JSON.stringify(params) // create a JSON string object 
+});
+const data = await response.json();
+                            </code></pre>
                             <div class="pt-0 ps-2 py-2">
                                 <button type="button" class="btn btn-primary" id="fetchWithParamsJson">Call With params</button>
                             </div>
@@ -113,16 +129,15 @@ const response = await axios.post(`${apiUrl}/products`, params);</code></pre>
                     <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     
                         <div>
-                            <pre><code class="javascript">const products = await getProducts();
-const lastProduct = products.data[products.data.length - 1];
-
-const params = {
-    name: faker.commerce.product(),
-    price: faker.commerce.price(),
-    tags: faker.hacker.noun()
-};
-const response = await axios.patch(`${apiUrl}/products/${lastProduct.id}`, params);
-statusColor(response);</code></pre>
+                            <pre><code class="javascript">
+const onProductResponse = await fetch(`${apiUrl}/products/${lastProduct.id}`, {
+    method: 'PATCH', // set PATCH method (update values)
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(params)
+});
+                            </code></pre>
                             <div class="pt-0 ps-2 py-2">
                                 <div>
                                     <!-- Update Product form -->
@@ -157,16 +172,12 @@ statusColor(response);</code></pre>
                     </h2>
                     <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div>
-                            <pre><code class="javascript">const products = await getProducts();
-const lastProduct = products.data[products.data.length - 1];
-
-const params = {
-    name: faker.commerce.product(),
-    price: faker.commerce.price(),
-    tags: faker.hacker.noun()
-};
-const response = await axios.patch(`${apiUrl}/products/${lastProduct.id}`, params);
-statusColor(response);</code></pre>
+                            <pre><code class="javascript">
+const id = document.querySelector('#products-id-list').value;
+const response = await fetch(`${apiUrl}/products/${id}`, { // Call with method DELETE and add id to delete in URL
+    method: 'DELETE'
+});    
+                            </code></pre>
                             <div class="pt-0 ps-2 py-2">
                                 <button type="button" class="btn btn-danger" id="fetchDelete">Delete</button>
                             </div>
@@ -182,7 +193,11 @@ statusColor(response);</code></pre>
                     </h2>
                     <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div>
-                            <pre><code class="javascript">const response = await axios.delete(`${apiUrl}/products/${id}`);</code></pre>
+                            <pre><code class="javascript">
+const response = await fetch(`${apiUrl}/products/${id}`, { // Delete the selected ID
+    method: 'DELETE'
+});
+                            </code></pre>
                             <div class="pt-0 ps-1 py-2">
                                 <select class="form-select" aria-label="Default select example" id="products-id-list"> 
                                     <option selected>Select id to delete</option>
