@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Axios basics</title>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <!-- Import highlight library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- End: Import highlight library -->
+
+        <!-- Import Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>      
+        <!-- End: Import Bootstrap -->
+
+        <!-- Import Faker -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.js"></script>
+        <!-- End: Import Faker -->
+    </head>
+    <body>
+
+    <div class="container">
+        <div class="accordion" id="accordionExample">
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Get products
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <pre><code class="javascript">axios.get(`${apiUrl}/products`).then(function (response) { // Get products
+    // Code here
+});</code></pre>
+                        <div class="pt-0 ps-2 py-2">
+                            <button type="button" class="btn btn-primary" id="axiosCall1">Call</button>
+                        </div>
+                </div>
+            </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Axios Error
+                    </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div>
+                        <pre><code class="javascript">axios.get('/user/12345').catch(function (error) {
+    // Code here
+});</code></pre>
+                        <div class="pt-0 ps-2 py-2">
+                            <button type="button" class="btn btn-primary" id="axiosCallError">Call Error</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Post with params
+                    </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    
+                        <div>
+                            <pre><code class="javascript">const params = new URLSearchParams();
+params.append('name', faker.commerce.product());
+params.append('price', faker.commerce.price());
+params.append('tags', faker.hacker.noun());
+
+axios.post(`${apiUrl}/products`, params).then(response => {
+    results.innerText = JSON.stringify(response.data, null, 2);
+    statusColor(response);
+});</code></pre>
+                            <div class="pt-0 ps-2 py-2">
+                                <button type="button" class="btn btn-primary" id="axiosWithParas">Call With params</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                        Post with JSON params
+                    </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    
+                        <div>
+                            <pre><code class="javascript">const params = {
+    name: faker.commerce.product(),
+    price: faker.commerce.price(),
+    tags: faker.hacker.noun()
+};
+const response = await axios.post(`${apiUrl}/products`, params);</code></pre>
+                            <div class="pt-0 ps-2 py-2">
+                                <button type="button" class="btn btn-primary" id="axiosWithParasJson">Call With params</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+                        Axios update
+                    </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    
+                        <div>
+                            <pre><code class="javascript">const products = await getProducts();
+const lastProduct = products.data[products.data.length - 1];
+
+const params = {
+    name: faker.commerce.product(),
+    price: faker.commerce.price(),
+    tags: faker.hacker.noun()
+};
+const response = await axios.patch(`${apiUrl}/products/${lastProduct.id}`, params);
+statusColor(response);</code></pre>
+                            <div class="pt-0 ps-2 py-2">
+                                <div>
+                                    <!-- Update Product form -->
+                                    <div class="form-group">
+                                        <label for="exampleInputName">Name</label>
+                                        <input type="email" class="form-control" id="exampleInputName" placeholder="Enter name" name="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPrice">Price</label>
+                                        <input type="number" class="form-control" id="exampleInputPrice" placeholder="Price" name="price">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputTags">Tags</label>
+                                        <input type="text" class="form-control" id="exampleInputTags" placeholder="Tags" name="tags">
+                                    </div>
+                                    <div class="pt-1">
+                                        <button type="button" class="btn btn-primary" id="axiosUpdate">Call With params</button>
+                                        <button type="button" class="btn btn-secondary" id="setRandomUpdateValues">Set random values</button>
+                                    </div>
+                                    <!-- End: Update Product form -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                        Delete last product
+                    </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div>
+                            <pre><code class="javascript">const products = await getProducts();
+const lastProduct = products.data[products.data.length - 1];
+
+const params = {
+    name: faker.commerce.product(),
+    price: faker.commerce.price(),
+    tags: faker.hacker.noun()
+};
+const response = await axios.patch(`${apiUrl}/products/${lastProduct.id}`, params);
+statusColor(response);</code></pre>
+                            <div class="pt-0 ps-2 py-2">
+                                <button type="button" class="btn btn-danger" id="axiosDelete">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                        Choose and delete
+                    </button>
+                    </h2>
+                    <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div>
+                            <pre><code class="javascript">const response = await axios.delete(`${apiUrl}/products/${id}`);</code></pre>
+                            <div class="pt-0 ps-1 py-2">
+                                <select class="form-select" aria-label="Default select example" id="products-id-list"> 
+                                    <option selected>Select id to delete</option>
+                                </select>
+                                <div class="pt-1">
+                                    <button type="button" class="btn btn-success" id="updateProductIds">Update IDs</button>
+                                    <button type="button" class="btn btn-danger" id="axiosDeleteById">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-2">
+                Response:
+                <textarea class="form-control" id="results" rows="10" cols="140"></textarea>
+            </div>
+            <div>Status: 
+                <span id="status"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+    </body>
+</html>
