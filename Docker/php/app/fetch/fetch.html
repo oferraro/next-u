@@ -21,6 +21,17 @@
     <body>
 
     <div class="container">
+        <div class="mb-3">
+            <div class="mb-3 mt-3">
+                <label for="apiUrl" class="form-label ms-1">Api URL (change to point your API or leave it as it is to use json server)</label>
+                <input class="form-control" type="text" id="apiUrl" value="http://localhost:3000">
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" id="updateApiUrl">Update API URL</button>
+            </div>
+            <div class="alert alert-success" role="alert" id="apiUrlChanged" style="display: none">
+            </div>              
+        </div>
         <div class="accordion" id="accordionExample">
 
             <div class="accordion-item">

@@ -1,7 +1,16 @@
     /**
      * Define api base url to reuse everywhere
      */
-    const apiUrl = 'http://localhost:3000';
+    let apiUrl = 'http://localhost:3000';
+
+    document.getElementById('updateApiUrl').addEventListener('click', function () {
+        apiUrl = document.getElementById('apiUrl').value;
+        const alertEL = document.getElementById('apiUrlChanged');
+        alertEL.innerHTML = `
+            apiUrl changed to ${apiUrl}
+        `;
+        alertEL.style.display = 'block';
+    });
 
     /**
      * setInputValue function to easily set an element value
