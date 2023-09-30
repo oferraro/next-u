@@ -3,6 +3,25 @@
      */
     let apiUrl = 'http://localhost:3000';
 
+    let collection = 'products';
+
+    const updateCollectionsName = () => {
+        const collectionNameElements = document.querySelectorAll('.collection-name');;
+        collectionNameElements.forEach(element => {
+            element.innerText = collection;
+        });
+    }
+
+    document.getElementById('collectionApiUrl').addEventListener('click', function () {
+        collection = document.getElementById('collection').value;
+        const alertEL = document.getElementById('collectionChanged');
+        alertEL.innerHTML = `
+            collection changed to ${collection}
+        `;
+        alertEL.style.display = 'block';
+        updateCollectionsName();
+    });
+
     document.getElementById('updateApiUrl').addEventListener('click', function () {
         apiUrl = document.getElementById('apiUrl').value;
         const alertEL = document.getElementById('apiUrlChanged');
@@ -62,7 +81,7 @@
      * getProducts function call api, get products, and return products result to be reused 
      */
     async function getProducts() {
-        return await fetch(`${apiUrl}/products`);
+        return await fetch(`${apiUrl}/${collection}`);
     }
 
     async function updateProductIds() {
@@ -117,7 +136,7 @@
         params.append('price', faker.commerce.price());
         params.append('tags', faker.hacker.noun());
 
-        const result = await fetch(`${apiUrl}/products`, {
+        const result = await fetch(`${apiUrl}/${collection}`, {
             method: 'POST',
             body: params
         });
@@ -130,7 +149,7 @@
         const response = await getProducts();
         const products = await response.json();
         const lastProduct = products[products.length - 1];
-        const deleteUrl = `${apiUrl}/products/${lastProduct.id}`;
+        const deleteUrl = `${apiUrl}/${collection}/${lastProduct.id}`;
         const deleteResponse = await fetch(deleteUrl, {
             method: 'DELETE'
         });
@@ -144,7 +163,7 @@
             price: faker.commerce.price(),
             tags: faker.hacker.noun()
         };
-        const response = await fetch(`${apiUrl}/products`, {
+        const response = await fetch(`${apiUrl}/${collection}`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -166,7 +185,7 @@
             price: elementValue('#exampleInputPrice'),
             tags: elementValue('#exampleInputPrice')
         };
-        const onProductResponse = await fetch(`${apiUrl}/products/${lastProduct.id}`, {
+        const onProductResponse = await fetch(`${apiUrl}/${collection}/${lastProduct.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json"
@@ -180,7 +199,7 @@
 
     document.getElementById('fetchDeleteById').addEventListener('click', async function(event) {
         const id = document.querySelector('#products-id-list').value;
-        const response = await fetch(`${apiUrl}/products/${id}`, {
+        const response = await fetch(`${apiUrl}/${collection}/${id}`, {
             method: 'DELETE'
         });
         statusColor(response);

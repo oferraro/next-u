@@ -30,19 +30,32 @@
                 <button class="btn btn-primary" id="updateApiUrl">Update API URL</button>
             </div>
             <div class="alert alert-success" role="alert" id="apiUrlChanged" style="display: none">
-            </div>              
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="mb-3 mt-3">
+                <label for="apiUrl" class="form-label ms-1">Collection (Use other collection)</label>
+                <input class="form-control" type="text" id="collection" value="products">
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-secondary" id="collectionApiUrl">Update Collection name</button>
+            </div>
+            <div class="alert alert-success" role="alert" id="collectionChanged" style="display: none">
+            </div>
         </div>
         <div class="accordion" id="accordionExample">
 
+        <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Get products
+                        Get&nbsp;<span class="collection-name">products</span>
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <pre><code class="javascript">async function getProducts() {
-    return await fetch(`${apiUrl}/products`);
+    return await fetch(`${apiUrl}/${collection}`);
 }</code></pre>
                         <div class="pt-0 ps-2 py-2">
                             <button type="button" class="btn btn-primary" id="fetchCall1">Call</button>
@@ -88,7 +101,7 @@ params.append('name', faker.commerce.product()); // Append values to form object
 params.append('price', faker.commerce.price());
 params.append('tags', faker.hacker.noun());
 
-const result = await fetch(`${apiUrl}/products`, {  // Call with params and method post
+const result = await fetch(`${apiUrl}/${collection}`, {  // Call with params and method post
     method: 'POST',
     body: params
 });
@@ -115,7 +128,7 @@ const params = { // Create a json object for params
     price: faker.commerce.price(),
     tags: faker.hacker.noun()
 };
-const response = await fetch(`${apiUrl}/products`, {
+const response = await fetch(`${apiUrl}/${collection}`, {
     method: 'POST',
     headers: {
         "Content-Type": "application/json" // define header for content type in order to send json data
@@ -141,7 +154,7 @@ const data = await response.json();
                     
                         <div>
                             <pre><code class="javascript">
-const onProductResponse = await fetch(`${apiUrl}/products/${lastProduct.id}`, {
+const onProductResponse = await fetch(`${apiUrl}/${collection}/${lastProduct.id}`, {
     method: 'PATCH', // set PATCH method (update values)
     headers: {
         "Content-Type": "application/json"
@@ -185,7 +198,7 @@ const onProductResponse = await fetch(`${apiUrl}/products/${lastProduct.id}`, {
                         <div>
                             <pre><code class="javascript">
 const id = document.querySelector('#products-id-list').value;
-const response = await fetch(`${apiUrl}/products/${id}`, { // Call with method DELETE and add id to delete in URL
+const response = await fetch(`${apiUrl}/${collection}/${id}`, { // Call with method DELETE and add id to delete in URL
     method: 'DELETE'
 });    
                             </code></pre>
@@ -205,7 +218,7 @@ const response = await fetch(`${apiUrl}/products/${id}`, { // Call with method D
                     <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div>
                             <pre><code class="javascript">
-const response = await fetch(`${apiUrl}/products/${id}`, { // Delete the selected ID
+const response = await fetch(`${apiUrl}/${collection}/${id}`, { // Delete the selected ID
     method: 'DELETE'
 });
                             </code></pre>
