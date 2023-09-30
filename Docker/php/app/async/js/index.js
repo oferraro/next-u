@@ -66,10 +66,10 @@ callPromiseAsyncEl.addEventListener('click', function() {
  * Basic use of promise 
 */
 new Promise(function(resolve, reject) {
-    resolve('success');
-    // reject('error');
+    //resolve('success');
+    reject(new Error('This is an error message'));
 }).then(function(message) {
     console.log('successfull ' + message);
 }).catch(function(error) {
-    console.log('fail ' + error);
+    console.log('fail ' + error.message);
 });
