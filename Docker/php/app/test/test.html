@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="styles.css" >
+
+<div id="products-content">
+</div>
+
+<select id="dropdown">
+
+</select>
+
+<button onclick="deleteProduct()">Delete it</button>
+
+<script>
+
+    const deleteProduct = async () => {
+        const dropdownEl = document.querySelector('#dropdown');
+
+        console.log('delete function', dropdownEl.value);
+        await fetch('http://localhost:3000/products/' + dropdownEl.value, {
+            method: 'DELETE'
+        });
+        getShowProducts();
+    };
+
+    const getProductTemplate = (value) => {
+        let htmlData = `<div class="product" id="product-id-${value.id}">
+        <p>
+            name: ${value.name}
+        </p>`;
+    
+        htmlData += `
+        <p>  
+            price: ${value.price || 0}
+        </p>`;
+        
+        htmlData += `
+        <p>
+            tag: ${value.tags}
+        </p>
+        </div>`;
+        return htmlData;
+    };
+
+    async function getProducts() {
+        const url = 'http://localhost:3000/products';
+
+        const result2 = await fetch(url);
+        const jsonData = await result2.json();
+        return jsonData;
+    }
+
+    const showProducts = (jsonData) => {
+        const prod = document.getElementById('products-content');
+        prod.innerHTML = '';
+        
+        jsonData.forEach((value) => {
+            const newDiv = document.createElement('div');
+            let htmlData = getProductTemplate(value);
+            newDiv.innerHTML = htmlData;
+            prod.appendChild(newDiv);
+        });
+    }
+
+    const getShowProducts = async () => {
+        let allProducts = await getProducts();
+        showProducts(allProducts);
+
+        const dropdownEl = document.getElementById('dropdown');
+        dropdownEl.innerHTML = '';
+        allProducts.forEach(function (product) {
+            const newOption = document.createElement('option');
+            newOption.setAttribute('value', product.id);
+            newOption.innerText = product.name;
+            dropdownEl.appendChild(newOption);
+        });
+    }
+
+    getShowProducts();
+</script>

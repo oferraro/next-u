@@ -1,0 +1,14 @@
+#products-content {
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.product {
+    background-color: black;
+    color: white;
+    padding: 5px 5px 10px 5px;
+    width: 200px;
+}
